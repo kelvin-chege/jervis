@@ -3,25 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>C8 Elite Trading Dashboard Integration with Jenkins</title>
+    <link rel="stylesheet" href="styles.css">
+    <title>C8 Elite Trading Dashboard</title>
 </head>
 <body>
-    <h1>C8 Elite Trading Dashboard Integrated with Jenkins Signal Notifications</h1>
-    <p>This is a demonstration of how the C8 Elite trading dashboard can be integrated with Jenkins for receiving signal notifications.</p>
-    <h2>Features</h2>
-    <ul>
-        <li>Real-time trading signals</li>
-        <li>Automated trading execution</li>
-        <li>Customizable notification settings</li>
-    </ul>
-    <h2>How to Integrate</h2>
-    <p>Follow these steps to integrate your C8 Elite trading dashboard with Jenkins:</p>
-    <ol>
-        <li>Set up Jenkins and create a new job.</li>
-        <li>Configure your Jenkins job to trigger on trading signals.</li>
-        <li>Use webhooks to send notifications to your C8 Elite dashboard.</li>
-        <li>Verify the integration by testing the signal notifications.</li>
-    </ol>
-    <p>For more details, visit the official documentation of C8 Elite and Jenkins.</p>
+    <header>
+        <h1>C8 Elite Trading Dashboard</h1>
+        <div class="jenkins-status">
+            <h2>Jenkins Status</h2>
+            <p id="jenkins-status-text">Loading...</p>
+        </div>
+    </header>
+    <main>
+        <section class="signal-generation">
+            <h2>Signal Generation</h2>
+            <button id="generate-signal">Generate Signal</button>
+            <div id="signal-output">No signal generated.</div>
+        </section>
+        <section class="history">
+            <h2>Signal History</h2>
+            <ul id="signal-history">
+                <!-- Signal history will be populated here -->
+            </ul>
+        </section>
+        <section class="configuration">
+            <h2>Configuration Inputs</h2>
+            <label for="input-config">Input Configuration:</label>
+            <input type="text" id="input-config" placeholder="Enter configuration">
+            <button id="save-config">Save Configuration</button>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2026 C8 Elite Trading</p>
+    </footer>
+    <script src="script.js"></script>
 </body>
 </html>
