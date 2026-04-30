@@ -3,39 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>C8 Elite Trading Dashboard</title>
+    <title>Interactive Trading Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #1c1c1c; color: #fff; }
+        h1 { text-align: center; }
+        .dashboard { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 20px; }
+        .panel { background-color: #2c2c2c; padding: 15px; border-radius: 8px; }
+        .input { margin: 10px 0; }
+        button { background-color: #00bcd4; color: white; border: none; border-radius: 5px; padding: 10px; cursor: pointer; }
+        button:hover { background-color: #0097a7; }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>C8 Elite Trading Dashboard</h1>
-        <div class="jenkins-status">
+    <h1>Interactive Trading Dashboard</h1>
+    <div class="dashboard">
+        <div class="panel">
             <h2>Jenkins Status</h2>
-            <p id="jenkins-status-text">Loading...</p>
+            <p id="jenkins-status">Checking...</p>
         </div>
-    </header>
-    <main>
-        <section class="signal-generation">
+        <div class="panel">
             <h2>Signal Generation</h2>
-            <button id="generate-signal">Generate Signal</button>
-            <div id="signal-output">No signal generated.</div>
-        </section>
-        <section class="history">
+            <input type="text" id="jenkins-url" class="input" placeholder="Jenkins URL"/>
+            <input type="text" id="api-token" class="input" placeholder="API Token"/>
+            <button onclick="generateSignal()">Generate Signal</button>
+        </div>
+        <div class="panel">
             <h2>Signal History</h2>
-            <ul id="signal-history">
-                <!-- Signal history will be populated here -->
-            </ul>
-        </section>
-        <section class="configuration">
-            <h2>Configuration Inputs</h2>
-            <label for="input-config">Input Configuration:</label>
-            <input type="text" id="input-config" placeholder="Enter configuration">
-            <button id="save-config">Save Configuration</button>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2026 C8 Elite Trading</p>
-    </footer>
-    <script src="script.js"></script>
+            <div id="signal-history">No signals generated yet.</div>
+        </div>
+        <div class="panel">
+            <h2>Live Statistics</h2>
+            <p>Total Signals: <span id="total-signals">0</span></p>
+            <p>Success Rate: <span id="success-rate">0%</span></p>
+        </div>
+    </div>
+    <script>
+        let totalSignals = 0;
+        let successfulSignals = 0;
+
+        function saveConfiguration() {
+            const url = document.getElementById('jenkins-url').value;
+            const token = document.getElementById('api-token').value;
+            localStorage.setItem('jenkins-url', url);
+            localStorage.setItem('api-token', token);
+        }
+
+        function checkJenkinsStatus() {
+            // Placeholder for Jenkins status check logic
+            const status = 'Connected';  // Simulated response
+            document.getElementById('jenkins-status').innerText = status;
+        }
+
+        function generateSignal() {
+            saveConfiguration();
+            // Simulated signal generation logic
+            totalSignals++;
+            successfulSignals++;
+            const historyDiv = document.getElementById('signal-history');
+            const timestamp = new Date().toLocaleString();
+            historyDiv.innerHTML += `<p>Signal generated at ${timestamp}</p>`;
+            updateStats();
+        }
+
+        function updateStats() {
+            document.getElementById('total-signals').innerText = totalSignals;
+            document.getElementById('success-rate').innerText = (successfulSignals / totalSignals * 100).toFixed(2) + '%';
+        }
+
+        // Load saved configuration on startup
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('jenkins-url').value = localStorage.getItem('jenkins-url') || '';
+            document.getElementById('api-token').value = localStorage.getItem('api-token') || '';
+            checkJenkinsStatus();
+        });
+    </script>
 </body>
 </html>
